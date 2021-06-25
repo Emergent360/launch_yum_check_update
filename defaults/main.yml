@@ -1,0 +1,6 @@
+---
+# defaults file for launch_oscap_scan
+scan_threshold: 85
+snow_call: false
+mitigate: false
+oscap_profile: "xccdf_org.ssgproject.content_profile_stig"
