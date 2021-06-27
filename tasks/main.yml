@@ -11,17 +11,21 @@
   until: check_update is not failed
   retries: 5
 
-- debug:
-    var: check_update
-
-#- name: Create new incidentii
-#  servicenow.itsm.incident:ii
-#    instance:ii
-#      username: "{{ snow_username }}"ii
-#      password: "{{ snow_password }}"ii
-#      host: "{{ snow_instance }}"ii
-#    state: newii
-#    short_description: Basic test incidentii
+- name: Create new incident
+  servicenow.itsm.incident:
+    instance:
+      username: "{{ snow_username }}"
+      password: "{{ snow_password }}"
+      host: "{{ snow_instance }}"
+    state: new
+    short_description: Basic test incident
+    severity: 3
+    priority: 2
+    caller)id: "System Administrator"
+    comments: "Yum Security Update needed:\n\t{{ inventory_hostname }}"
+  register: incident
+  delegate_to: localhost
+  when: check_update.rc == 100
 
 #- name: set_mitigation
 #  set_fact:
