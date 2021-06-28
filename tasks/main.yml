@@ -12,18 +12,19 @@
   retries: 5
 
 - name: Create new incident
-  servicenow.itsm.incident:
-    instance:
-      username: "{{ snow_username }}"
-      password: "{{ snow_password }}"
-      host: "{{ snow_instance }}"
-    state: new
-    short_description: Basic test incident
-    impact: medium
-    urgency: medium
-    caller: "admin"
-    description: "Yum Security Update needed:\n\t{{ inventory_hostname }}"
-  register: incident
+  snow_record:
+    username: "{{ snow_username }}"
+    password: "{{ snow_password }}"
+    instance: "{{ snow_instance }}"
+    state: present
+    table: incident
+    data:
+      short_description: "SECURITY COMPLIANCE - Package updates needed on {{inventory_hostname}}"
+      severity: 3
+      priority: 2
+      caller_id: "System Administrator"
+      comments: "--------\n SECURITY COMPLIANCE \n--------\n Updates needed on {inventory_hostname}}"      
+  register: snow_var
   delegate_to: localhost
   when: check_update.rc == 100
 
