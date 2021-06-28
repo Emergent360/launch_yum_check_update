@@ -23,7 +23,7 @@
       severity: 3
       priority: 2
       caller_id: "System Administrator"
-      comments: "--------\n SECURITY COMPLIANCE \n--------\n Updates needed on {inventory_hostname}}"      
+      comments: "--------\n SECURITY COMPLIANCE \n--------\n Updates needed on {{inventory_hostname}}"      
   register: snow_var
   delegate_to: localhost
   when: check_update.rc == 100
