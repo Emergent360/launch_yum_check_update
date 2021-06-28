@@ -19,10 +19,10 @@
       host: "{{ snow_instance }}"
     state: new
     short_description: Basic test incident
-    severity: 3
-    priority: 2
-    caller)id: "System Administrator"
-    comments: "Yum Security Update needed:\n\t{{ inventory_hostname }}"
+    impact: medium
+    urgency: medium
+    caller: "admin"
+    description: "Yum Security Update needed:\n\t{{ inventory_hostname }}"
   register: incident
   delegate_to: localhost
   when: check_update.rc == 100
